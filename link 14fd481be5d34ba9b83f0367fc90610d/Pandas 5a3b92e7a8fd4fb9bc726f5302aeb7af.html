@@ -1,0 +1,1120 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Pandas</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5a3b92e7-a8fd-4fb9-bc72-6f5302aeb7af" class="page sans"><header><img class="page-cover-image" src="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/905624.png" style="object-position:center 27.21%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🐼</span></div><h1 class="page-title">Pandas</h1><p class="page-description"></p></header><div class="page-body"><ul id="e6dd6503-d385-4fb1-8ee6-3b15875fde25" class="block-color-yellow_background toggle"><li><details open=""><summary>單維度的資料Series  </summary><figure id="f1a958a3-b8bc-401e-8cd6-d88a53fefa4c" class="image"><a href="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/Untitled.png"><img style="width:290px" src="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/Untitled.png"/></a></figure><figure class="block-color-yellow_background callout" style="white-space:pre-wrap;display:flex" id="7b9795ab-6541-44e3-a01f-0bb140bacc3d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">pd.Serise(列表)    #以列表資料為底，建立Serise</div></figure><pre id="88b66163-be0e-4954-bfd8-9301faaac152" class="code"><code>#單維度的資料Series
+import pandas as pd
+
+data = pd.Series([20, 10, 15])
+print(data)
+print(&quot;==================================&quot;)
+print(&quot;Max&quot;,data.max())         #找最大值
+print(&quot;==================================&quot;)
+print(&quot;Median&quot;,data.median())   #計算中位數
+print(&quot;==================================&quot;)
+print(data * 2)                 #放大2倍
+print(&quot;==================================&quot;)
+data1 = data == 20              #比較運算 (會比對裡面的每一筆資料，回傳True or False)
+print(data1)</code></pre><figure class="block-color-yellow_background callout" style="white-space:pre-wrap;display:flex" id="e990b70a-8dc5-42ac-ab93-7641eb8f6224"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">pd.Serise(資料列表, index=索引列表)    #以列表資料為底，建立Serise #自訂索引</div></figure><pre id="e2231984-a512-4396-b716-a44bf5753ca6" class="code"><code>#觀察資料
+data = pd.Series([5, 4, -2, 3, 7], index=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;])
+
+print(&quot;==================================&quot;)
+print(data)             #印出
+print(&quot;==================================&quot;)
+print(data.dtype)       #資料型態   data.dtypes
+print(&quot;==================================&quot;)
+print(data.size)        #資料數量
+print(&quot;==================================&quot;)
+print(data.index)       #資料索引
+print(&quot;==================================&quot;)
+print(data[1])          #根據順序取值 data[順序]
+print(&quot;==================================&quot;)
+print(data[&quot;a&quot;])        #根據索引取值 data[索引]
+print(&quot;==================================&quot;)</code></pre><pre id="ae5104d0-70c8-4409-94fe-14bd0335f5d0" class="code"><code>#各種數學和統計運算
+data = pd.Series([3, 10, 20, 5, -12])
+
+print(&quot;==================================&quot;)
+print(&quot;sum&quot;,data.sum())                 #加法總和
+print(&quot;==================================&quot;)
+print(&quot;max&quot;,data.max())                 #最大值
+print(&quot;==================================&quot;)
+print(&quot;prod&quot;,data.prod())               #乘法總和
+print(&quot;==================================&quot;)
+print(&quot;mean&quot;,data.mean())               #平均數
+print(&quot;==================================&quot;)
+print(&quot;median&quot;,data.median())           #中位數
+print(&quot;==================================&quot;)
+print(&quot;std&quot;,data.std())                 #標準差
+print(&quot;==================================&quot;)
+print(&quot;nlargest\n&quot;,data.nlargest(3))    #取前3大數字
+print(&quot;==================================&quot;)
+print(&quot;nsmallest\n&quot;,data.nsmallest(2))  #取最小的2個數字
+print(&quot;==================================&quot;)</code></pre><pre id="ceae3e42-c69d-467d-a8eb-0ac2eb0e96ce" class="code"><code>#字串操作相關
+data = pd.Series([&quot;您好&quot;,&quot;python&quot;,&quot;Pandas&quot;])
+
+print(&quot;==================================&quot;)
+print(data.str.lower())                 #所有字串變小寫
+print(&quot;==================================&quot;)
+print(data.str.upper())                 #所有字串變大寫
+print(&quot;==================================&quot;)
+print(data.str.len())                   #的到每個字串長度
+print(&quot;==================================&quot;)
+print(data.str.cat(sep=&quot;,&quot;))            #把所有字串用(,)串在一起
+print(&quot;==================================&quot;)
+print(data.str.contains(&quot;P&quot;))           #判斷每個字串是否包含P (回傳True or False)
+print(&quot;==================================&quot;)
+print(data.str.replace(&quot;您好&quot;,&quot;Hello&quot;)) #將字串做取代
+print(&quot;==================================&quot;)</code></pre></details></li></ul><hr id="31acff61-b95e-474f-9afd-c7c8f376131a"/><ul id="363efa62-9ff1-497e-b6a7-fafaded229ee" class="block-color-teal_background toggle"><li><details open=""><summary>雙維度的資料DataFrame </summary><figure id="b34b773a-d385-43d9-aec9-cf1d0aeaa56f" class="image"><a href="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/Untitled%201.png"><img style="width:292px" src="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/Untitled%201.png"/></a></figure><figure class="block-color-yellow_background callout" style="white-space:pre-wrap;display:flex" id="bb7a5e06-81cd-4165-8253-d555da6803ce"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">pd.DataFrame(字典)    #以字典資料為底，建立DataFrame</div></figure><pre id="f40a6b1f-05d7-4eed-97b8-51b982c1ec45" class="code"><code>#雙維度的資料DataFrame
+import pandas as pd
+data = pd.DataFrame({
+    &quot;name&quot;:[&quot;AMY&quot;, &quot;John&quot;, &quot;Bob&quot;],
+    &quot;salary&quot;:[30000, 50000, 40000]
+}) #第一欄名字，第二欄薪水
+print(data)
+print(&quot;==================================&quot;)
+print(data[&quot;name&quot;])         #取得特定欄(直向)
+print(&quot;==================================&quot;)
+print(data[&quot;salary&quot;])       #取得特定欄(直向)
+print(&quot;==================================&quot;)
+print(data.iloc[1])         #取得特定列(橫向)  1代表第二列
+print(&quot;==================================&quot;)
+print(data.iloc[0,0])       #取得位置 第0欄 第0列的資料 [0,0]
+print(&quot;==================================&quot;)
+print(data.loc[0,&quot;name&quot;])   #姓名欄第0個</code></pre><figure class="block-color-yellow_background callout" style="white-space:pre-wrap;display:flex" id="510160c9-9de3-47ed-909e-3e86552177aa"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">pd.DataFrame(字典,index=索引列表)    #以字典資料為底，建立DataFrame</div></figure><pre id="e6cb0cf4-994f-48d0-8f0e-94d67014a2c8" class="code"><code>#觀察資料 
+data = pd.DataFrame({
+    &quot;name&quot;:[&quot;Amy&quot;, &quot;John&quot;, &quot;Bob&quot;],
+    &quot;salary&quot;:[30000, 50000, 40000]
+}, index=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;])
+print(&quot;==================================&quot;)
+print(data)                            #印出資料
+print(&quot;==================================&quot;)
+print(&quot;資料數量&quot;,data.size)             #資料數量
+print(&quot;==================================&quot;)
+print(&quot;資料形狀(列,欄)&quot;,data.shape)     #資料形狀(列,欄)
+print(&quot;==================================&quot;)
+print(&quot;資料索引&quot;,data.index)            #資料索引
+print(&quot;==================================&quot;)</code></pre><pre id="e8688a73-5073-40ce-99ea-97627cb45245" class="code"><code>#取得[列]資料  橫向(Row)
+print(&quot;==================================&quot;)
+print(&quot;取得第二列&quot;,data.iloc[1], sep=&quot;\n&quot;)      #取得第二列
+print(&quot;==================================&quot;)
+print(&quot;取得第c列&quot;,data.loc[&quot;c&quot;], sep=&quot;\n&quot;)      #取得第c列</code></pre><pre id="61a310d8-f65a-47e3-b6a7-73326a26b952" class="code"><code>#取得[欄]資料  直向(Col)
+print(&quot;==================================&quot;)
+print(&quot;取得 name 欄位&quot;, data[&quot;name&quot;], sep=&quot;\n&quot;) #取得 name 欄位
+print(&quot;==================================&quot;)</code></pre><pre id="2b3d98f7-d047-4d15-bc54-016bd6ea5d32" class="code"><code>#雙維度的資料取得特定的[欄]或是[列]，就會變成單維度Series型態,所以Series能用的都能用
+print(&quot;==================================&quot;)
+names = data[&quot;name&quot;]  #取得單維度Series資料
+print(&quot;把 name 全部轉成大寫&quot;, names.str.upper(), sep=&quot;\n&quot;)  #把 name 全部轉成大寫
+print(&quot;==================================&quot;)
+salaries = data[&quot;salary&quot;]  #取得單維度Series資料
+print(&quot;員工薪水平均值&quot;, salaries.mean(), sep=&quot;\n&quot;)          #員工薪水平均值
+print(&quot;==================================&quot;)</code></pre><pre id="e2b8c45e-61f1-4ab4-815b-5be2d2c5538a" class="code"><code>#建立新的欄位
+print(&quot;==================================&quot;)
+data[&quot;revenue&quot;] = [500000, 400000, 300000]                  #data[&quot;新欄位名稱&quot;] = 列表資料
+print(data)
+print(&quot;==================================&quot;)
+data[&quot;rank&quot;] = pd.Series([3, 6, 1], index=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;])    #data[&quot;新欄位名稱&quot;] = Series型態資料(比較正式的寫法) 原本有index這裡也要有
+print(data)
+print(&quot;==================================&quot;)
+data[&quot;cp&quot;] = data[&quot;revenue&quot;] / data[&quot;salary&quot;]               #使用兩個欄位做運算並存到cp欄位
+print(data)
+print(&quot;==================================&quot;)</code></pre></details></li></ul><hr id="bdc6fb92-3560-4455-b888-81cfb8fa0681"/><ul id="02450da7-fa8b-47c1-8d1f-851e1ec5e35d" class="block-color-gray_background toggle"><li><details open=""><summary>篩選資料 </summary><pre id="5ee77a37-fa0e-432b-b3b9-799a9d8e2269" class="code"><code>#篩選條件Series
+data = pd.Series([30, 15, 20])
+
+print(&quot;==================================&quot;)
+condition = [True, False, True] #只要30和20不要15  建立篩選條件(與資料列數量對應的布林值)
+filteredData = data[condition]
+print(filteredData)
+print(&quot;==================================&quot;)
+condition = data &gt; 18 #只要大於18  建立篩選條件(與資料列數量對應的布林值)
+print(condition)
+filteredData = data[condition]
+print(filteredData)</code></pre><pre id="adee49b2-beaf-4cf8-b9b2-6513f6aceeb4" class="code"><code>#篩選條件Series(字串)
+data = pd.Series([&quot;您好&quot;,&quot;python&quot;,&quot;Pandas&quot;])
+
+print(&quot;==================================&quot;)
+condition = [False, True, True] #只要python和Pandas不要您好  建立篩選條件(與資料列數量對應的布林值)
+filteredData = data[condition]
+print(filteredData)
+print(&quot;==================================&quot;)
+condition = data.str.contains(&quot;P&quot;)      #包含P的資料
+print(condition)
+filteredData = data[condition]
+print(filteredData)
+print(&quot;==================================&quot;)</code></pre><pre id="777cc579-06ff-4404-ae05-e51956ba9996" class="code"><code>#篩選條件 DataFrame
+data = pd.DataFrame({
+    &quot;name&quot;:[&quot;Amy&quot;, &quot;John&quot;, &quot;Bob&quot;],
+    &quot;salary&quot;:[30000, 50000, 40000]
+})
+print(data)
+
+print(&quot;==================================&quot;)
+condition = [False, True, True]
+filteredData = data[condition]
+print(filteredData)
+print(&quot;==================================&quot;)
+condition = data[&quot;salary&quot;] &gt; 40000      #薪水大於4萬的員工資料
+print(condition)
+filteredData = data[condition]
+print(filteredData)
+print(&quot;==================================&quot;)
+condition = data[&quot;name&quot;] == &quot;Amy&quot;       #名稱叫做Amy的
+print(condition)
+filteredData = data[condition]
+print(filteredData)
+print(&quot;==================================&quot;)</code></pre></details></li></ul><hr id="f6063757-06cb-47e9-a7fe-0e79a12c4a21"/><ul id="23478bed-b6a8-4621-9a34-8fe9cf6b66c6" class="block-color-blue_background toggle"><li><details open=""><summary>資料處理範例 </summary><pre id="7e7b8f88-b798-48df-b3a3-854a4f735c11" class="code"><code>#讀取資料
+import pandas as pd
+
+data = pd.read_csv(&quot;googleplaystore.csv&quot;)</code></pre><pre id="01e18ecd-76a8-4dab-83c1-08d59939742d" class="code"><code>#觀察資料
+print(data)</code></pre><pre id="088f7768-50c0-4cdd-b821-13d2da6c55e7" class="code"><code>#觀察資料
+print(&quot;====================================&quot;)
+print(&quot;資料數量&quot;,data.shape)
+print(&quot;====================================&quot;)
+print(&quot;資料欄位&quot;,data.columns)
+print(&quot;====================================&quot;)</code></pre><pre id="52f9f004-4aeb-4d58-a299-e8d9a0fc5955" class="code"><code>#分析資料 : 評分的各種統計數據
+print(&quot;====================================&quot;)
+print(data[&quot;Rating&quot;])
+print(&quot;====================================&quot;)
+#排除錯誤資料 (&lt;=5的都是正確資料)
+condition = data[&quot;Rating&quot;] &lt;= 5 #找出符合的就好
+data = data[condition]
+print(&quot;====================================&quot;)
+print(&quot;平均數&quot;,data[&quot;Rating&quot;].mean())
+print(&quot;====================================&quot;)
+print(&quot;中位數&quot;,data[&quot;Rating&quot;].median())
+print(&quot;====================================&quot;)
+print(&quot;取得前100個應用程式的平均&quot;,data[&quot;Rating&quot;].nlargest(100).mean())   #沒排除錯誤資料前 5.14明顯有問題，因為最高才5
+print(&quot;====================================&quot;)</code></pre><pre id="72cfae55-cec1-4e72-83b1-d7a308d35b7f" class="code"><code>#分析資料 : 安裝數量的各種統計數據  (重複執行會出錯)
+#print(data[&quot;Installs&quot;][10472])                             #原本的資料不是int而是object
+data[&quot;Installs&quot;] = pd.to_numeric(data[&quot;Installs&quot;].str.replace(&quot;[,+]&quot;,&quot;&quot;).replace(&quot;Free&quot;,&quot;&quot;))  #轉換成數字 .str.replace(&quot;[,+]&quot;,&quot;&quot;)用空白取代掉
+print(&quot;====================================&quot;)
+print(data[&quot;Installs&quot;])
+print(&quot;安裝數量平均數&quot;,data[&quot;Rating&quot;].mean())
+print(&quot;====================================&quot;)
+condition = data[&quot;Installs&quot;] &gt; 100000
+print(&quot;安裝數量大於10000的應用程式有幾個&quot;, data[condition].shape)  #data[condition].shape[0] 只要4947
+print(&quot;====================================&quot;)
+
+#condition = data[&quot;Installs&quot;] == &quot;Free&quot;
+#filteredData = data[condition]
+#print(filteredData)</code></pre><pre id="9616f3c3-d179-4e53-834f-74e9235da2fa" class="code"><code>#基於資料的應用 : 關鍵字搜尋應用程式名稱
+keyword = input(&quot;請輸入關鍵字:&quot;)
+condition = data[&quot;App&quot;].str.contains(keyword, case=False)   #會有大小寫差別 所以要加入參數(case=False)忽略大小寫
+print(&quot;====================================&quot;)
+print(data[condition][&quot;App&quot;])  #只列出應用程式名稱
+print(&quot;包含關鍵字的應用程式數量&quot;,data[condition].shape)  #只列出應用程式名稱  data[condition].shape[0]只列出幾列
+print(&quot;====================================&quot;)
+#print(data[condition])</code></pre></details></li></ul><hr id="2e46bef7-e9fe-432a-ba8c-64b06c2a704e"/><ul id="1e52ddcd-611c-4367-bef8-13169ddb27f6" class="block-color-orange_background toggle"><li><details open=""><summary>新增資料方法 </summary><pre id="7dd8cafa-4b8e-4f9e-a98b-6a9758b027ce" class="code"><code>import pandas as pd
+
+data = pd.DataFrame({
+    &quot;name&quot;:[&quot;Amy&quot;, &quot;John&quot;, &quot;Bob&quot;],
+    &quot;salary&quot;:[30000, 50000, 40000]
+})
+
+print(data)
+
+print(data.columns)
+print(len(data.columns))
+print(data.shape)</code></pre><pre id="0a0295d1-6464-4684-be82-fbb9548bc452" class="code"><code>#append加入
+
+data = data.append(pd.DataFrame({&quot;name&quot;: [&quot;Alice&quot;],&quot;salary&quot;: [45000]}), ignore_index=True)
+print(data)</code></pre><pre id="8012896d-95a3-43bf-ad1f-e676a65ad673" class="code"><code>#append加入
+
+name1= [&quot;Amy&quot;, &quot;John&quot;, &quot;Bob&quot;]
+salary1 = [30000, 50000, 40000]
+
+for i in range(len(name1)):
+    data = data.append(pd.DataFrame({&quot;name&quot;: [name1[i]],&quot;salary&quot;: [salary1[i]]}), ignore_index=True)
+
+print(data)</code></pre><pre id="c3b71fdd-8a1c-476f-8688-a9cc0a32a327" class="code"><code>#append加入
+
+new_data = pd.DataFrame([
+    {&quot;name&quot;: &quot;Alice&quot;, &quot;salary&quot;: 45000},
+    {&quot;name&quot;: &quot;Eva&quot;, &quot;salary&quot;: 55000},
+    {&quot;name&quot;: &quot;David&quot;, &quot;salary&quot;: 60000}
+])
+
+data = data.append(new_data, ignore_index=True)
+
+print(data)</code></pre><pre id="215a3fdb-a8db-46d5-aad5-9b3f1599e8ff" class="code"><code>#concat方式
+
+new_data = pd.DataFrame({
+    &quot;name&quot;: [&quot;Alice&quot;, &quot;Eva&quot;, &quot;David&quot;],
+    &quot;salary&quot;: [45000, 55000, 60000]
+})
+
+data = pd.concat([data, new_data], ignore_index=True)
+print(data)</code></pre><pre id="aa589adb-c9b6-43fc-b406-64b30bd1d620" class="code"><code>#concat方式
+
+name1= [&quot;Amy&quot;, &quot;John&quot;, &quot;Bob&quot;]
+salary1 = [30000, 50000, 40000]
+
+for i in range(len(name1)):
+    data = pd.concat([data, pd.DataFrame({&quot;name&quot;: [name1[i]],&quot;salary&quot;: [salary1[i]]})], ignore_index=True)
+    #data = pd.concat([data, pd.DataFrame 那串  ], ignore_index=True)
+print(data)</code></pre><pre id="ae26daba-d981-4ece-9103-9034b5dc4892" class="code"><code>#在指定位置插入資料 (作法一)
+
+import pandas as pd
+
+# 原始 DataFrame
+data = pd.DataFrame({
+    &quot;name&quot;: [&quot;Amy&quot;, &quot;John&quot;, &quot;Bob&quot;],
+    &quot;salary&quot;: [30000, 50000, 40000]
+})
+
+# 要插入的新資料
+new_data = pd.DataFrame({
+    &quot;name&quot;: [&quot;Alice&quot;, &quot;Eva&quot;],
+    &quot;salary&quot;: [45000, 55000]
+})
+
+# 欲插入的列位置（索引）
+insert_index = 1
+
+# 在指定位置插入資料  (先加入0的資料,再加入新資料,最後加入原本資料)
+data = data.iloc[:insert_index].append(new_data, ignore_index=True).append(data.iloc[insert_index:], ignore_index=True)
+
+print(data)</code></pre><pre id="0e99d5d5-b248-4f54-bc90-e246ae291c53" class="code"><code>#插入新欄位
+import pandas as pd
+
+# 原始 DataFrame
+data = pd.DataFrame({
+    &quot;name&quot;: [&quot;Amy&quot;, &quot;John&quot;, &quot;Bob&quot;],
+    &quot;salary&quot;: [30000, 50000, 40000]
+})
+
+# 要插入的欄位資訊
+column_name = &quot;age&quot;
+column_values = [25, 30, 35]
+
+# 欲插入的欄位位置（索引）
+insert_index = 1
+
+# 在指定位置插入欄位
+data.insert(insert_index, column_name, column_values)
+
+print(data)</code></pre><pre id="2335457c-2aa4-4523-b518-402d0fd331ec" class="code"><code>#取得資料
+print(data[&quot;name&quot;])
+print(&quot;=============================&quot;)
+print(data.iloc[0], sep=&quot;\n&quot;)       #取出第0列
+print(&quot;=============================&quot;)
+print(data.iloc[0,0], sep=&quot;\n&quot;)     #取出第0列的name
+print(&quot;=============================&quot;)
+print(data.iloc[0,1], sep=&quot;\n&quot;)     #取出第0列的salary
+print(&quot;=============================&quot;)
+print(data.loc[1,&quot;name&quot;], sep=&quot;\n&quot;) #取出第name欄第0列
+print(&quot;=============================&quot;)
+print(data.loc[1,&quot;salary&quot;], sep=&quot;\n&quot;) #取出第name欄第0列</code></pre></details></li></ul><hr id="0d3bc0eb-7ac1-473e-9cd3-5c246f6028ea"/><ul id="40ed4ffb-8a30-43af-9e9c-5d1d27bf9c67" class="block-color-brown_background toggle"><li><details open=""><summary>其他常用函式 </summary><pre id="81a2f847-f01f-4498-9ee8-849b453e1039" class="code"><code>import pandas as pd
+
+# 原始資料
+data = {
+    &#x27;name&#x27;: [&#x27;Amy&#x27;, &#x27;John&#x27;, &#x27;Bob&#x27;, &#x27;Alice&#x27;, &#x27;Eva&#x27;],
+    &#x27;age&#x27;: [25, 30, 35, 28, 32],
+    &#x27;gender&#x27;: [&#x27;Female&#x27;, &#x27;Male&#x27;, &#x27;Male&#x27;, &#x27;Female&#x27;, &#x27;Female&#x27;],
+    &#x27;salary&#x27;: [50000, 60000, 55000, 52000, 58000]
+}
+
+# 建立 DataFrame
+df = pd.DataFrame(data)
+
+print(&quot;====================================1&quot;)   # 顯示前幾行資料
+print(df.head(4))
+
+print(&quot;====================================2&quot;)   # 顯示資料的維度
+print(&#x27;Shape:&#x27;, df.shape)
+
+print(&quot;====================================3&quot;)   # 顯示資料的基本資訊
+df.info()
+
+print(&quot;====================================4&quot;)   # 描述性統計
+print(df.describe())</code></pre><pre id="a77f6fe0-1262-437b-bea0-6f76439de279" class="code"><code>print(&quot;====================================5&quot;)   # 選擇指定欄位的所有行
+print(df.loc[:, &#x27;name&#x27;])    #也可以
+
+print(&quot;====================================6&quot;)   # 選擇年齡大於 30 歲的行
+print(df.loc[df[&#x27;age&#x27;] &gt; 30])
+
+print(&quot;====================================7&quot;)   # 填充缺失值
+df[&#x27;salary&#x27;].fillna(df[&#x27;salary&#x27;].mean(), inplace=True)
+print(df)
+
+print(&quot;====================================8&quot;)   # 刪除包含缺失值的行
+df.dropna(inplace=True)
+print(df)</code></pre><pre id="92bc4c6d-5595-46f0-bb0a-05328ad1d6ab" class="code"><code>print(&quot;====================================9&quot;) # 根據性別進行分組計算平均薪資
+average_salary_by_gender = df.groupby(&#x27;gender&#x27;)[&#x27;salary&#x27;].mean()
+print(average_salary_by_gender)
+
+print(&quot;====================================10&quot;) # 按照薪資降序排序
+df_sorted = df.sort_values(&#x27;salary&#x27;, ascending=False)
+print(df_sorted)
+
+print(&quot;====================================11&quot;)</code></pre><figure class="block-color-yellow_background callout" style="white-space:pre-wrap;display:flex" id="608753ec-d539-4125-a18f-c6416badfc61"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">head()
+#shape
+#info()
+#describe()
+#loc、fillna()
+#dropna()
+#groupby()
+#sort_values()</div></figure><pre id="4305084b-650d-473c-918d-b50826b6a9ae" class="code"><code>import pandas as pd
+
+# 建立 DataFrame
+df1 = pd.DataFrame({
+    &#x27;key_column&#x27;: [&#x27;A&#x27;, &#x27;B&#x27;, &#x27;C&#x27;, &#x27;D&#x27;],
+    &#x27;value_column1&#x27;: [1, 2, 3, 4]
+})
+
+df2 = pd.DataFrame({
+    &#x27;key_column&#x27;: [&#x27;B&#x27;, &#x27;D&#x27;, &#x27;E&#x27;, &#x27;F&#x27;],
+    &#x27;value_column2&#x27;: [5, 6, 7, 8]
+})
+
+print(&quot;====================================12&quot;)   # 合併 DataFrame
+merged_df = pd.merge(df1, df2, on=&#x27;key_column&#x27;)
+print(merged_df)
+
+print(&quot;====================================13&quot;)  # 連接 DataFrame
+concatenated_df = pd.concat([df1, df2], axis=0)
+print(concatenated_df)
+
+print(&quot;====================================14&quot;)  # 樞紐分析
+pivot_table = merged_df.pivot_table(values=[&#x27;value_column1&#x27;, &#x27;value_column2&#x27;], index=&#x27;key_column&#x27;)
+print(pivot_table)
+
+print(&quot;====================================15&quot;)  # 填充缺失值
+concatenated_df.fillna(0, inplace=True)
+print(concatenated_df)</code></pre><pre id="598dd49b-3fab-4d7c-8e15-cee54020f4b8" class="code"><code>print(&quot;====================================16&quot;)  # 寫入 CSV 檔案
+pivot_table.to_csv(&#x27;pivot_table.csv&#x27;)
+
+print(&quot;====================================17&quot;)  # 處理重複行
+duplicated_rows = concatenated_df.duplicated()
+print(&#x27;Duplicated Rows:&#x27;)
+print(concatenated_df[duplicated_rows])
+
+print(&quot;====================================18&quot;)  
+concatenated_df.drop_duplicates(inplace=True)
+print(&#x27;DataFrame after dropping duplicates:&#x27;)
+print(concatenated_df)</code></pre><pre id="43ee7112-c4f9-4fd2-90b3-a6207722b25b" class="code"><code>#使用 pd.merge() 將 df1 和 df2 根據 key_column 進行合併操作，生成了一個合併後的 DataFrame merged_df。
+#使用 pd.concat() 將 df1 和 df2 沿著行方向連接，生成了一個連接後的 DataFrame concatenated_df。
+#使用 pivot_table() 在 merged_df 上進行樞紐分析，根據 key_column 生成了一個包含兩個值欄位的樞紐表 pivot_table。
+#使用 fillna() 將 pivot_table 中的缺失值填充為 0。
+#使用 to_csv() 將 pivot_table 寫入 CSV 檔案。
+#使用 duplicated() 檢查 concatenated_df 是否有重複行，並使用 drop_duplicates() 刪除重複行。</code></pre><pre id="9b9a88a8-df9e-4e28-be04-0607db2411b3" class="code"><code>#新增欄位
+
+import pandas as pd
+
+# 建立 DataFrame
+data = {
+    &#x27;name&#x27;: [&#x27;Amy&#x27;, &#x27;John&#x27;, &#x27;Bob&#x27;, &#x27;Alice&#x27;, &#x27;Eva&#x27;],
+    &#x27;age&#x27;: [25, 30, 35, 28, 32],
+    &#x27;gender&#x27;: [&#x27;Female&#x27;, &#x27;Male&#x27;, &#x27;Male&#x27;, &#x27;Female&#x27;, &#x27;Female&#x27;],
+    &#x27;salary&#x27;: [50000, 60000, 55000, 52000, 58000]
+}
+df = pd.DataFrame(data)
+
+# 新增欄位
+df[&#x27;bonus&#x27;] = df[&#x27;salary&#x27;] * 0.1
+print(&quot;\nDataFrame with New Column:&quot;)
+print(df)</code></pre><pre id="1ee1e7f9-d374-4d29-b0af-d30205170580" class="code"><code>#網路範例
+
+import pandas as pd
+
+# 從網路資料創建 DataFrame
+url = &#x27;https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv&#x27;
+df = pd.read_csv(url)
+
+# 顯示 DataFrame 的前幾行
+print(&quot;DataFrame:&quot;)
+print(df.head(2))
+
+# 顯示 DataFrame 的基本資訊
+print(&quot;\nDataFrame Info:&quot;)
+print(df.info())</code></pre><pre id="bb24f2fc-93fe-446f-b82f-3b5ee74ef934" class="code"><code># 描述性統計
+print(&quot;\nDescriptive Statistics:&quot;)
+print(df.describe())
+
+# 選擇特定欄位的所有行
+print(&quot;\nSelected Column:&quot;)
+print(df[&#x27;Name&#x27;])</code></pre><pre id="1972ba00-4af7-4985-831c-27ad5f594117" class="code"><code># 條件篩選
+filtered_df = df[df[&#x27;Age&#x27;] &gt; 30]
+print(&quot;\nFiltered DataFrame:&quot;)
+print(filtered_df)
+
+# 新增欄位
+df[&#x27;FamilySize&#x27;] = df[&#x27;SibSp&#x27;] + df[&#x27;Parch&#x27;] + 1
+print(&quot;\nDataFrame with New Column:&quot;)
+print(df)</code></pre><pre id="403c5f0c-4d7a-47d9-b126-1f767c8edc30" class="code"><code># 根據欄位排序
+sorted_df = df.sort_values(&#x27;Fare&#x27;, ascending=False)
+print(&quot;\nSorted DataFrame:&quot;)
+print(sorted_df)
+
+# 分組計算平均年齡
+grouped_df = df.groupby(&#x27;Pclass&#x27;)[&#x27;Age&#x27;].mean()
+print(&quot;\nGrouped DataFrame:&quot;)
+print(grouped_df)</code></pre></details></li></ul><hr id="b25b6a5e-0e67-4eb4-a46c-dcde4b46df79"/><ul id="686ce265-f205-42c6-914e-4289f5e984f9" class="block-color-purple_background toggle"><li><details open=""><summary>影片 </summary><figure id="5ab3fe14-be71-4136-9ae1-d0f4cb7e2017"><div class="source"><a href="https://www.youtube.com/watch?v=5QZqzKCDCQ4&amp;list=RDCMUCguZS-y7codLSt6vpkVdnKg&amp;index=4">https://www.youtube.com/watch?v=5QZqzKCDCQ4&amp;list=RDCMUCguZS-y7codLSt6vpkVdnKg&amp;index=4</a></div></figure><figure id="18c9925e-8033-49d2-a99d-ce1300dcd60b"><div class="source"><a href="https://www.youtube.com/watch?v=175ZZC3Hr0Y&amp;list=RDCMUCguZS-y7codLSt6vpkVdnKg&amp;index=5">https://www.youtube.com/watch?v=175ZZC3Hr0Y&amp;list=RDCMUCguZS-y7codLSt6vpkVdnKg&amp;index=5</a></div></figure><figure id="d31b5114-26e7-4fb6-8df7-754553f4cef3"><div class="source"><a href="https://www.youtube.com/watch?v=Krj-50BNo9E&amp;list=RDCMUCguZS-y7codLSt6vpkVdnKg&amp;index=3">https://www.youtube.com/watch?v=Krj-50BNo9E&amp;list=RDCMUCguZS-y7codLSt6vpkVdnKg&amp;index=3</a></div></figure><figure id="279c378c-75b7-4d10-8408-3919dc879e75"><div class="source"><a href="https://www.youtube.com/watch?v=w-V7zvsBlZw&amp;list=RDCMUCguZS-y7codLSt6vpkVdnKg&amp;index=1">https://www.youtube.com/watch?v=w-V7zvsBlZw&amp;list=RDCMUCguZS-y7codLSt6vpkVdnKg&amp;index=1</a></div></figure><figure id="21656e79-cc32-457f-a120-f58ccb0aa3fe"><div class="source"><a href="https://www.youtube.com/watch?v=B5BgPWBZhvY&amp;list=RDCMUCguZS-y7codLSt6vpkVdnKg&amp;index=2">https://www.youtube.com/watch?v=B5BgPWBZhvY&amp;list=RDCMUCguZS-y7codLSt6vpkVdnKg&amp;index=2</a></div></figure></details></li></ul><hr id="550d67e1-5919-4fcd-9650-0f675d728ff2"/><ul id="f20681d8-16c9-4fb9-a573-5df71aca64b1" class="block-color-orange_background toggle"><li><details open=""><summary>檔案 </summary><figure id="5bf2639f-e50a-48ad-ab79-c1c56f06f6ed"><div class="source"><a href="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/add_data_example.ipynb">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3a3e460e-4dd9-4711-9e7a-42d08afc8fb0/add_data_example.ipynb</a></div></figure><figure id="8bf10f55-3fe3-4f8c-b5f9-c80ed66811db"><div class="source"><a href="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/data_processing_example.ipynb">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6e5b3098-4b0f-4cd2-a6f2-9971edfbdbba/data_processing_example.ipynb</a></div></figure><figure id="4f95b2cf-19f2-409c-9a8d-892c1613c869"><div class="source"><a href="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/drop_data_example.ipynb">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/186362a9-45a6-4b59-af3f-75af5ee69414/drop_data_example.ipynb</a></div></figure><figure id="a94909c1-3e93-4866-8299-b3793a06cbbc"><div class="source"><a href="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/googleplaystore.csv">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9ff74b37-6c84-43c0-99e8-049571f872e1/googleplaystore.csv</a></div></figure><figure id="360973b3-37e4-452b-a7d0-0f44f35e8158"><div class="source"><a href="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/groupby_example.ipynb">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/51dff876-97c7-49ac-acb3-ae8f06aef3ea/groupby_example.ipynb</a></div></figure><figure id="0d51641f-7630-40f1-8418-5032ba47ee66"><div class="source"><a href="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/Other_common_functions.ipynb">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a2b11851-ad7a-4f37-b709-9ea45910f319/Other_common_functions.ipynb</a></div></figure><figure id="f2f8a3cf-e946-413c-b4d8-ad76a710a153"><div class="source"><a href="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/pivot_table.csv">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/724426b4-9c90-4d7b-af5d-23fb4fee90c7/pivot_table.csv</a></div></figure><figure id="e724cf58-09c4-45ad-a6b7-c2fadf8a907f"><div class="source"><a href="Pandas%205a3b92e7a8fd4fb9bc726f5302aeb7af/python_pandas_example.ipynb">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/040352ec-f294-4ab5-9f0e-fe3ae37f9ffb/python_pandas_example.ipynb</a></div></figure><p id="90d2241c-2c37-44c2-9786-55941e8f3473" class="">
+</p></details></li></ul></div></article></body></html>

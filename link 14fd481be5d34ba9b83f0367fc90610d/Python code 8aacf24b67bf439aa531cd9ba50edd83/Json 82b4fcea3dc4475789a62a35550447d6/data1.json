@@ -1,0 +1,50 @@
+{
+    "name": "John",
+    "age": 30,
+    "city": "New York",
+    "contacts": {
+        "email": "john@example.com",
+        "phone": "1234567890"
+    },
+    "contacts_test": [
+        {
+            "email": "jjj@example.com",
+            "phone": "10000000"
+        },
+        {
+            "email": "bbb@example.com",
+            "phone": "b0000000"
+        }
+    ],
+    "friends": [
+        {
+            "name": "Alice",
+            "age": 28,
+            "city": "Los Angeles",
+            "pets": [
+                {
+                    "name": "Max",
+                    "species": "dog",
+                    "age": 5
+                },
+                {
+                    "name": "Lucy",
+                    "species": "cat",
+                    "age": 3
+                }
+            ]
+        },
+        {
+            "name": "Bob",
+            "age": 32,
+            "city": "Chicago",
+            "pets": [
+                {
+                    "name": "Buddy",
+                    "species": "dog",
+                    "age": 4
+                }
+            ]
+        }
+    ]
+}

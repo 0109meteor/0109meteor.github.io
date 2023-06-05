@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>linux command cheat sheet</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2a7724fd-22e1-441a-aef4-5c500be6cb87" class="page sans"><header><img class="page-cover-image" src="linux%20command%20cheat%20sheet%202a7724fd22e1441aaef45c500be6cb87/1140046.jpg" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🤖</span></div><h1 class="page-title">linux command cheat sheet</h1><p class="page-description"></p></header><div class="page-body"><nav id="a7260df5-f50e-4580-9239-b3be8ce71ed1" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3bd735d0-4cee-440f-8d51-28c6fe94c920">Navigation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7e5cc3d9-7269-417c-8922-a7453210cf52">pwd</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#fcccc7a2-332e-43d0-b2c8-2a960fb9b91f">用GUI打開路徑</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#eb201e7d-c9e1-4211-8182-7ca8afa1f925">ls</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#78b60a42-4444-4889-906a-4cf564ee33e7">cd</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#629057ba-c134-4c95-8a0c-44bdd41e27cd">man</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b0b1a131-57c7-4ea6-a999-c46295288ce5">File</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1eb89382-cc35-40c4-a9fe-e6a770352a5a">mkdir</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#68bb8527-7412-4888-b43f-24a3565d0e72">cat</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bc58c4dc-e7e9-4c05-b630-eda9dcbc4154">cp</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7fdc85a2-ec34-45ea-bb10-317e8d541ed5">rm</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f68dafa0-8517-4047-a2ac-593eec54f0a6">mv</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#938a4d09-b805-4053-aa28-f93306d3e572">vim</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d682fd04-d4bf-421a-b90e-b7a6994193d5">雜項</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#86ff23db-4312-4ec8-b13e-00abba31212f">上下</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bf9b3f26-f049-4bb1-9fdc-16807c954fab">control + R</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#51827b48-3e8b-483b-8c54-0757aad7118e">control + S</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6525b475-7fd8-4dcc-a7ce-d76d916adaa1">package manager</a></div></nav><h2 id="3bd735d0-4cee-440f-8d51-28c6fe94c920" class="">Navigation</h2><h3 id="7e5cc3d9-7269-417c-8922-a7453210cf52" class="">pwd</h3><p id="c68b05cb-a290-439b-b2d4-7a8211a239b6" class=""><code>pwd</code>: 看目前位置(print working directory)</p><p id="2e43a226-900d-45f7-a94c-4d31c5512e81" class="">
+</p><h3 id="fcccc7a2-332e-43d0-b2c8-2a960fb9b91f" class="">用GUI打開路徑</h3><p id="cbd2689f-2012-4052-a95c-202c6da37e81" class=""><code>open &lt;路徑&gt;</code> : 用finder打開某個路徑（適用mac）</p><p id="020689ae-8609-4036-8ca3-23c373bc06bb" class=""><code>explorer.exe &lt;路徑&gt;</code>: 用檔案總管打開路徑（適用WSL）</p><ul id="449d71e4-b152-401c-b394-662c8a55628e" class="bulleted-list"><li style="list-style-type:disc"><code>.</code> 代表目前路徑</li></ul><p id="13de694b-f148-4fa2-aa6a-ed1bbfe67eae" class="">
+</p><h3 id="eb201e7d-c9e1-4211-8182-7ca8afa1f925" class="">ls</h3><p id="31295e45-b3a8-4470-8df5-d2931586cb36" class=""><code>ls</code>: 列出目前位置檔案(list)</p><ul id="81df7d51-68d9-4fbe-97ab-101313228c88" class="bulleted-list"><li style="list-style-type:disc"><code>-a</code>: 顯示隱藏檔案</li></ul><ul id="7f82a16f-b49c-48df-93e1-c2b393780f8e" class="bulleted-list"><li style="list-style-type:disc"><code>-l</code>: 顯示詳細資訊</li></ul><ul id="65b2a75f-f0dc-4512-9f2a-4b2b9dfdbc86" class="bulleted-list"><li style="list-style-type:disc"><code>-la</code>:顯示隱藏檔案&amp;詳細資訊</li></ul><ul id="9957ae8b-324e-4383-9831-861002ac458d" class="bulleted-list"><li style="list-style-type:disc"><code>ls &lt;路徑&gt;</code> : 後面可加上路徑，就可以列出某個路徑下的檔案</li></ul><p id="0f7c2352-b9c6-45e9-9e27-695cfa48ce8b" class="">
+</p><h3 id="78b60a42-4444-4889-906a-4cf564ee33e7" class="">cd</h3><p id="d5f23e5d-17a2-46c7-94ad-2f81249449df" class=""><code>cd &lt;路徑&gt;</code>: 移動到其他位置(change directory)</p><ul id="ecbe9545-227c-47b0-9cc7-d0de2ea947f4" class="bulleted-list"><li style="list-style-type:disc"><code>..</code>代表上一層路徑</li></ul><p id="e6b0a37d-7d27-4860-961e-8a3e7fe9a372" class="">
+</p><h3 id="629057ba-c134-4c95-8a0c-44bdd41e27cd" class="">man</h3><p id="982da133-13c5-4c86-a483-42b2626d4561" class=""><code>man &lt;指令&gt;</code>: 查看man page（說明文件）</p><p id="a83218fe-e102-41aa-885e-43edc26ab759" class="">
+</p><p id="1fa43369-2541-4adf-96c7-0df4fa9befb8" class="">相對路徑 v.s. 絕對路徑</p><ul id="0ddb988a-914c-4e0a-94a2-cf29fe5d170a" class="bulleted-list"><li style="list-style-type:disc">絕對路徑：<code>/Users/jamesku/repos</code></li></ul><ul id="5e915781-ba0f-488c-a689-5ddb2edb637a" class="bulleted-list"><li style="list-style-type:disc">如果你現在在<code>/Users/jamesku/</code> 上面的路徑轉換成相對路徑就是<code>repos</code></li></ul><h2 id="b0b1a131-57c7-4ea6-a999-c46295288ce5" class="">File</h2><h3 id="1eb89382-cc35-40c4-a9fe-e6a770352a5a" class="">mkdir</h3><p id="92ffaf90-2c90-408f-a61c-abdb5991e4ef" class=""><code>mkdir &lt;資料夾路徑&gt;</code>: 建立資料夾</p><h3 id="68bb8527-7412-4888-b43f-24a3565d0e72" class="">cat</h3><p id="09dddb4f-ecd2-4550-b2a0-4157e6cca53d" class=""><code>cat</code>: 印出檔案內容</p><h3 id="bc58c4dc-e7e9-4c05-b630-eda9dcbc4154" class="">cp</h3><p id="98c6c13e-bd47-458b-a10e-4226494f24ed" class=""><code>cp &lt;來源&gt; &lt;目的&gt;</code>: 複製檔案</p><ul id="d260ecdb-bdb5-49e9-8a9d-8cc8f3c12d13" class="bulleted-list"><li style="list-style-type:disc"><code>-r</code>: recursive（複製資料夾時可使用）</li></ul><h3 id="7fdc85a2-ec34-45ea-bb10-317e8d541ed5" class="">rm</h3><p id="bce24cec-116c-4d75-bc95-cb56bac1ebb1" class=""><code>rm &lt;路徑&gt;</code>: 刪除檔案</p><ul id="b161e46e-0ece-4834-b319-f796a4986633" class="bulleted-list"><li style="list-style-type:disc"><code>-r</code>: recursive（刪除資料夾時可使用）</li></ul><p id="ac4d2788-7cb3-4c71-a7bb-7cda254729a5" class="">
+</p><h3 id="f68dafa0-8517-4047-a2ac-593eec54f0a6" class="">mv</h3><p id="c76bc54d-3a5c-486b-b58a-85e8ac17c90f" class=""><code>mv &lt;來源&gt; &lt;目的&gt;</code>: 移動檔案</p><ul id="dddc3754-50de-4c80-89be-f362ae5f4a66" class="bulleted-list"><li style="list-style-type:disc">可用於重新命名</li></ul><h3 id="938a4d09-b805-4053-aa28-f93306d3e572" class="">vim</h3><p id="3d60ce42-7a6f-4fc4-b2a1-782f19744edb" class=""><code>vim &lt;檔案名稱&gt;</code>：用vim開啟檔案</p><ul id="dff90ee3-3538-4054-961b-5e61b079e3d6" class="bulleted-list"><li style="list-style-type:disc">可以打開不存在的檔名，存檔後會出現新的檔案</li></ul><ul id="3d9f5529-531e-465a-bc72-f314a40c171b" class="bulleted-list"><li style="list-style-type:disc"><a href="https://youtu.be/Nav8vpUfS7A">vim教學影片</a></li></ul><p id="67b133ba-0386-4007-bb77-4fa7e72ab540" class="">
+</p><h2 id="d682fd04-d4bf-421a-b90e-b7a6994193d5" class="">雜項</h2><h3 id="86ff23db-4312-4ec8-b13e-00abba31212f" class="">上下</h3><p id="69c852c4-9ed3-4bec-8d9d-f07952a4018d" class="">只要按上跟下就可以選擇之前用過的指令，不用重打一次</p><h3 id="bf9b3f26-f049-4bb1-9fdc-16807c954fab" class="">control + R</h3><p id="8a89f590-2503-4c94-ad6d-535ddb28b1b9" class="">如果你想要找很久以前輸入的指令，可以按下control + R，然後輸入文字，就可以搜尋了。如果找到的不是你要的，可以繼續案control + R繼續往前搜尋。</p><p id="c8246c19-60a8-4439-bce7-bb507d0f5a48" class="">
+</p><h3 id="51827b48-3e8b-483b-8c54-0757aad7118e" class="">control + S</h3><p id="dad8dd06-94d8-435a-ad46-479145fe8ec7" class="">如果想要往後搜尋，則是按下control + S</p><p id="6c578ce9-a214-4538-8206-3d54da460adc" class="">
+</p><h2 id="6525b475-7fd8-4dcc-a7ce-d76d916adaa1" class="">package manager</h2><p id="59abd04d-701a-43be-80a7-a6207fa491d1" class="">package manager就是拿來安裝東西的工具，就像手機的apple store，或是play store一樣，不過要使用指令來操作。不管是用哪種系統，package manager都是非常常用的工具，所以一定要知道怎麼使用。</p><p id="01363912-1d5a-4f88-81bf-891e19bb241e" class="">
+</p><p id="4aca25fb-e525-4365-8509-9e7efc13aace" class="">舉幾個例子，如果是mac電腦，通常會使用<code>brew</code>這個指令來安裝東西，ubuntu的話＄就會使用<code>apt</code>這個指令，manjaro則是使用<code>pacman</code>。</p><p id="b5725ecb-4ed3-4a00-b8de-c7d4383346b0" class="">
+</p><figure id="ecac5bd8-6a01-47ad-b617-ad067a5e8386"><a href="https://www.taskinghouse.com/posts/4766365-homebrew-essential-mac-suite-management-tools/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">「Mac」Homebrew：Mac 必裝的套件管理工具</div><div class="bookmark-description">Homebrew 官方網站： https://brew.sh/index_zh-tw.html Homebrew 可以在 Mac 上安裝系統沒有的套件，例如 Wget 這種工程師常用的軟體。不過 Homebrew 不是只有工程師才用的到，一般常見的軟體、下載 YouTube 的程式，其實都可以透過 Homebrew 來取得。 Homebrew 也有點像是 Ninite 這套軟體，我們不需要搜尋軟體的官方網站，並手動下載、安裝軟體。尤其是許多需要註冊登入才能下載的軟體，例如：Adobe Creative Cloud、Microsoft Office 都可以透過 Homebrew 來搜尋並安裝。 在 Mac 的終端機貼上以下指令： /bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot; 安裝套件的方式很簡單，例如安裝 Wget 一樣透過指令： brew install wget brew update &amp;&amp; brew upgrade &amp;&amp; brew cleanup 一氣呵成的指令內容分別是： brew update：更新</div></div><div class="bookmark-href"><img src="https://www.taskinghouse.com/wp-content/uploads/2018/05/cropped-favicon.png" class="icon bookmark-icon"/>https://www.taskinghouse.com/posts/4766365-homebrew-essential-mac-suite-management-tools/</div></div><img src="https://www.taskinghouse.com/wp-content/uploads/2018/05/mbdFRISfDr4H3P2p5LAj_og-image.jpg" class="bookmark-image"/></a></figure><figure id="730fbdfe-15b2-4350-b3e5-9105d92b6f8e"><a href="https://www.tokfun.net/os/linux/install-remove-linux-software-using-apt-command/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">[Linux] Ubuntu APT 指令更新、升級、移除、安裝套件教學 - 科技阿宅王</div><div class="bookmark-description">Linux Ubuntu 作業系統上可透過 apt 或 apt-get 指令對系統進行更新、升級、移除及安裝軟體套件，這篇將為各位介紹透過這兩種指令來管理 Ubuntu 系統上的軟體套件。 Linux Ubuntu「apt-get」與「apt」指令差別 「apt-get」與「apt」指令為 Debian 發行版本（Ubuntu 是基於 Debian 所延伸開發的發行版本）所使用的 Linux 應用程式管理工具，指令中「apt」為「Advanced Package Tool」的英文縮寫，「apt-get」與「apt」部分指令功能是對應相同的，而「apt」指令則有額外功能指令可以使用，目前「apt」指令在「Debian 8」及「Ubuntu 16.04」之後的版本皆有支援，兩種指令差別以下表格說明。 另外，在執行「apt-get」或「apt」指令時，因需要取得系統最高權限才能對 Linux 系統進行修改、更新或安裝，因此執行時需配合「sudo」指令來暫時切換至系統最高權限（就是所謂的 root 帳號）。 Linux Ubuntu「apt-get」與「apt」相關指令操作執行 因系統套件或應用軟體會隨著時間進行版本更新，所以在執行「系統更新」或「安裝、更新應用程式」前，會建議先更新軟體庫清單，以確保安裝或更新系統、軟體時會是當前最新版本（執行指令及畫面如下方及圖片所示）。 以上兩種指令功能相同，皆為「更新軟體庫清單」功能。 更新軟體庫清單後，可透過「apt upgrade」或「apt-get upgrade」指令進行系統或軟體，兩種指令功能皆相同（執行指令及畫面如下方及圖片所示）。 在安裝應用軟體或指令前，先透過「apt search」指令來搜尋想安裝的應用程式的「名稱」或「關鍵字」來確定安裝的套件名稱，如以下透過指令搜尋名為「VLC」的媒體撥放器。 若執行後所顯示的資料過多，也可配合「less」指令來顯示相關可安裝套件，並透過鍵盤「 ↑」及「 ↓」鍵來上下捲動切換，若想離開則按下鍵盤上的「 Q 」即可離開捲動模式（如下方指令所示）。 sudo apt search vlc | less 「apt install」與「apt-get install」指令兩種指令功能相同，皆用於安裝套件或軟體安裝所使用之指令，以下指令安裝「VLC」媒體撥放器為範例。 「apt remove」與「apt-get remove」指令兩種指令功能相同，皆用於移除套件或軟體所使用之指令，以下指令移除「VLC」媒體撥放器為範例。 「apt remove」與「apt-get remove」指令兩種指令功能相同，皆用於移除應用程式及所有設定檔所使用之指令，以下指令移除「VLC」媒體撥放器及所有相關設定檔為範例。 透過該指令可直接修改「/etc/apt/sources.list」軟體庫來源設定檔，執行後會使用預設文字編輯器進行編輯。 「apt list」指令可列出所有已安裝的套件或應用程式，若列出的項目太多可搭配「less」指令使用，透過鍵盤「 ↑」及「 ↓」鍵來上下捲動切換，若想離開則按下鍵盤上的「 Q 」即可離開捲動模式（如下方指令所示）。 此指令不需透過「sudo」指令來切換至最高權限即可使用。 「apt list」指令可顯示該套件或軟體的詳細資訊，若資訊過長也可搭配「less」指令來使用，以下指令來檢視「VLC」媒體撥放器的詳細資訊做為範例。 此指令不需透過「sudo」指令來切換至最高權限即可使用。 使用 ASCII 碼顯示一隻「牛」的彩蛋，但無特別實質性功能。 ※如有發現掉圖或檔案無法下載，請由回應區留言告知，將會盡速處理！ ※歡迎分享本篇文章網址給需要的朋友。 ※請勿全文轉貼本站文章，歡迎「部份引用」與介紹，並註明出處，謝謝。</div></div><div class="bookmark-href"><img src="https://www.tokfun.net/wp-content/uploads/2020/08/cropped-codefun-192x192.png" class="icon bookmark-icon"/>https://www.tokfun.net/os/linux/install-remove-linux-software-using-apt-command/</div></div><img src="https://www.tokfun.net/wp-content/uploads/2022/01/install-remove-linux-software-using-apt-command.png" class="bookmark-image"/></a></figure><figure id="9d2ecf0f-e467-4b54-9bee-9718824be500"><a href="https://blog.rex-tsou.com/2017/12/arch-linux%E5%A5%97%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-pacman/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Arch Linux：套件管理工具 pacman</div><div class="bookmark-description">The pacman package manager is one of the major distinguishing features of Arch Linux. It combines a simple binary package format with an easy-to-use build system. The goal of pacman is to make it possible to easily manage packages, whether they are from the official repositories or the user&#x27;s own builds.</div></div><div class="bookmark-href"><img src="https://blog.rex-tsou.com/favicon.ico" class="icon bookmark-icon"/>https://blog.rex-tsou.com/2017/12/arch-linux%E5%A5%97%E4%BB%B6%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-pacman/</div></div></a></figure></div></article></body></html>
